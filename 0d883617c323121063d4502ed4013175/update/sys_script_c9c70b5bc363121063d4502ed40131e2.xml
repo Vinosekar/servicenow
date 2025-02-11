@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sn_customerservice_healthcare_enquiries</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>GITHUB</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous) {
+    if (current.u_categories == 'Portal Issues' || current.u_categories == 'Medical Device') {
+        var incident = new GlideRecord('incident');
+        incident.initialize();
+        incident.caller_id = current.u_customer;              
+        incident.category = current.u_categories;             
+        incident.short_description = current.short_description; 
+        incident.description = current.description;           
+        incident.priority = current.priority;              
+        var incidentSysId = incident.insert();       
+		current.incident = incidentSysId;
+		current.update();
+    }
+})(current, previous);
+//DEMO]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-02-11 17:12:07</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c9c70b5bc363121063d4502ed40131e2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>GITHUB</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="github demo" source="x_1579784_github_d">0d883617c323121063d4502ed4013175</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="github demo">0d883617c323121063d4502ed4013175</sys_scope>
+        <sys_update_name>sys_script_c9c70b5bc363121063d4502ed40131e2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-02-11 17:12:07</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=c9c70b5bc363121063d4502ed40131e2"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>c9c70b5bc363121063d4502ed40131e2</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-02-11 17:12:07</sys_created_on>
+        <sys_id>7bd78b5bc363121063d4502ed40131af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-02-11 17:12:07</sys_updated_on>
+        <table>sys_script</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
